@@ -1,6 +1,6 @@
 {
   "name": "stillframe",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple distributed url-to-whatever framework.",
   "main": "./lib/index.js",
   "scripts": {
