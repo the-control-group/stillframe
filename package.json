@@ -4,8 +4,8 @@
   "description": "A simple distributed url-to-whatever framework.",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "istanbul cover mocha",
-    "test-ci": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls"
+    "test": "istanbul cover mocha test/**",
+    "test-ci": "istanbul cover _mocha test/** --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",

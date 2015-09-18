@@ -2,10 +2,10 @@
 
 var stream = require('stream');
 var assert = require('chai').assert;
-var EchoGenerator = require('../../lib/generators/echo.js');
+var EchoEngine = require('../../lib/engines/echo.js');
 
-describe('EchoGenerator', function(){
-	var echo = new EchoGenerator();
+describe('EchoEngine', function(){
+	var echo = new EchoEngine();
 
 	describe('run', function(){
 		it('returns a readable stream', function(){

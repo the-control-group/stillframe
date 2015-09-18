@@ -8,7 +8,7 @@ var redis = new (require('ioredis'))(config.redis);
 var assert = require('chai').assert;
 
 var FileStore = require('../lib/stores/file.js');
-var EchoGenerator = require('../lib/generators/echo.js');
+var EchoEngine = require('../lib/engines/echo.js');
 
 var tmp = __dirname + '/../tmp';
 
@@ -20,7 +20,7 @@ describe('Stillframe', function(){
 
 		before(function(){
 			timestamp = Date.now();
-			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoGenerator()});
+			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoEngine()});
 		});
 
 		describe('new entry', function(){
@@ -108,7 +108,7 @@ describe('Stillframe', function(){
 		before(function(){
 			timestamp = Date.now();
 			ttl = 1000*60*60;
-			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoGenerator()});
+			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoEngine()});
 		});
 
 		describe('new entry', function(){
@@ -360,11 +360,11 @@ describe('Stillframe', function(){
 		before(function(){
 			timestamp = Date.now();
 			ttl = 1000*60*60;
-			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoGenerator()});
+			stillframe = new Stillframe(config, new FileStore({path: tmp}), {echo: new EchoEngine()});
 		});
 
 		describe('(callback)', function(done){
-			it('returns an error for a nonexistant generator', function(done){
+			it('returns an error for a nonexistant engine', function(done){
 				stillframe.take('nonexistant', {url: 'http://www.example.com/callback'}, {}, ttl, function(err, snapshot){
 					assert.instanceOf(err, Error);
 					done();
@@ -388,7 +388,7 @@ describe('Stillframe', function(){
 			});
 
 			it('should return an existing pending snapshot', function(done){
-				// DIRTY: the echo generator has a 5ms timeout
+				// DIRTY: the echo engine has a 5ms timeout
 				stillframe.take('echo', {url: 'http://www.example.com/callback'}, {}, ttl, function(err, snapshot){
 					assert.isNull(err);
 					assert.deepEqual(snapshot, {status: 'pending', created: timestamp});
@@ -397,7 +397,7 @@ describe('Stillframe', function(){
 			});
 
 			it('should return an complete snapshot', function(done){
-				// DIRTY: the echo generator has a 5ms timeout
+				// DIRTY: the echo engine has a 5ms timeout
 				setTimeout(function(){
 					stillframe.take('echo', {url: 'http://www.example.com/callback'}, {}, ttl, function(err, snapshot){
 						assert.isNull(err);
@@ -410,7 +410,7 @@ describe('Stillframe', function(){
 
 
 		describe('(stream)', function(done){
-			it('emits an error for a nonexistant generator', function(done){
+			it('emits an error for a nonexistant engine', function(done){
 				stillframe.take('nonexistant', {url: 'http://www.example.com/stream'}, {}, ttl)
 				.on('error', function(err){
 					assert.instanceOf(err, Error);
