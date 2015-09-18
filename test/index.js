@@ -2,13 +2,43 @@
 
 var fs = require('fs');
 
+var stream = require('stream');
+
+
+
+
+
+function EchoEngine(config) {
+	this.config = config || {};
+};
+
+// run the generator
+// @return instance of stream.Readable
+EchoEngine.prototype.run = function run(request, options) {
+	var s = new stream.PassThrough();
+	s.metadata = {
+		type: 'application/json',
+		extension: 'json'
+	};
+
+	// DIRTY: this timeout exists for testing purposes
+	setTimeout(function(){
+		s.end(JSON.stringify(request));
+	}, 50);
+	
+	return s;
+};
+
+
+
+
+
 var config = require('../config.test.js');
 var Stillframe = require('../lib/index.js');
 var redis = new (require('ioredis'))(config.redis);
 var assert = require('chai').assert;
 
-var FileStore = require('../lib/stores/file.js');
-var EchoEngine = require('../lib/engines/echo.js');
+var FileStore = require('stillframe-store-file');
 
 var tmp = __dirname + '/../tmp';
 

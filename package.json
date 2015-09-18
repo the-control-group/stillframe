@@ -4,8 +4,8 @@
   "description": "A simple distributed url-to-whatever framework.",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "istanbul cover mocha test/**",
-    "test-ci": "istanbul cover _mocha test/** --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls"
+    "test": "istanbul cover mocha",
+    "test-ci": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
     "chai": "^2.2.0",
     "coveralls": "^2.11.3",
     "istanbul": "^0.3.20",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "stillframe-store-file": "^1.0.0"
   },
   "dependencies": {
     "ioredis": "^1.8.0",
