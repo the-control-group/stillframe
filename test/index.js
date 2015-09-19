@@ -41,15 +41,7 @@ StubEngine.prototype.run = function run(request, options) {
 
 function StubStore(config) {
 	this.config = config || {};
-	this.config.path = this.config.path || __dirname + '/../../tmp';
 	this.data = {};
-
-	// make sure the directory exists
-	try {
-		fs.mkdirSync(this.config.path);
-	} catch (err) {
-		if (err.code !== 'EEXIST') throw err;
-	}
 }
 
 // fetch a file from cache
