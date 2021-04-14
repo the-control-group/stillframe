@@ -1,3 +1,5 @@
+**NOTE: THIS PROJECT IS NO LONGER MAINTAINED**
+
 [![Build Status](https://travis-ci.org/the-control-group/stillframe.svg?branch=master)](https://travis-ci.org/the-control-group/stillframe)
 [![Coverage Status](https://coveralls.io/repos/the-control-group/stillframe/badge.svg?branch=master&service=github)](https://coveralls.io/github/the-control-group/stillframe?branch=master)
 
